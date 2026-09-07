@@ -31,7 +31,21 @@
     );
   }
 
+  function lockHeaderLogoSize() {
+    if (document.getElementById('header-logo-lock')) {
+      return;
+    }
+    var style = document.createElement('style');
+    style.id = 'header-logo-lock';
+    style.textContent =
+      '.header-inner{display:flex!important;align-items:center!important}' +
+      '.wordmark{flex:0 0 auto!important;width:auto!important}' +
+      '.wordmark img{height:15px!important;width:auto!important;max-height:15px!important;max-width:150px!important}';
+    document.head.appendChild(style);
+  }
+
   function renderChrome() {
+    lockHeaderLogoSize();
     var headerHost = document.getElementById('site-header');
     var footerHost = document.getElementById('site-footer');
     if (headerHost) {
@@ -41,7 +55,7 @@
         '<span></span><span></span><span></span>' +
         '</button>' +
         '<a class="wordmark" href="index.html" aria-label="ClutchPlay home">' +
-        '<img src="images/home-button.png" alt="CLUTCHPLAY">' +
+        '<img src="images/home-button.png?v=10" alt="CLUTCHPLAY" width="140" height="15" style="height:15px;width:auto;max-height:15px;max-width:150px;display:block;">' +
         '</a>' +
         '<nav id="site-nav" class="site-nav">' +
         navLink('shop.html', 'Shop') +
