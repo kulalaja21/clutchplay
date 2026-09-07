@@ -17,6 +17,22 @@
     return file;
   }
 
+  var SOCIAL = {
+    facebook: 'https://www.facebook.com/TheCLutchPlayPh',
+    instagram: 'https://www.instagram.com/clutchplaymnl/',
+    tiktok: 'https://www.tiktok.com/@clutchplaymnla'
+  };
+
+  function socialLink(network, label) {
+    return (
+      '<a href="' +
+      SOCIAL[network] +
+      '" target="_blank" rel="noopener noreferrer">' +
+      label +
+      '</a>'
+    );
+  }
+
   function navLink(href, label) {
     var page = currentPage();
     var active = page === href || (href === 'index.html' && page === '');
@@ -73,7 +89,9 @@
         navLink('about.html', 'About') +
         navLink('contact.html', 'Contact') +
         '<a class="nav-email" href="mailto:wemakehustleplay@gmail.com">wemakehustleplay@gmail.com</a>' +
-        '<a href="https://www.facebook.com/TheCLutchPlayPh" target="_blank" rel="noopener noreferrer">Follow us on Facebook</a>' +
+        socialLink('facebook', 'Facebook') +
+        socialLink('instagram', 'Instagram') +
+        socialLink('tiktok', 'TikTok') +
         '</div>';
     }
 
@@ -88,7 +106,9 @@
         '<a href="shop.html">Shop</a>' +
         '<a href="about.html">About</a>' +
         '<a href="contact.html">Contact</a>' +
-        '<a href="https://www.facebook.com/TheCLutchPlayPh" target="_blank" rel="noopener noreferrer">Follow us on Facebook</a>' +
+        socialLink('facebook', 'Facebook') +
+        socialLink('instagram', 'Instagram') +
+        socialLink('tiktok', 'TikTok') +
         '<a href="mailto:wemakehustleplay@gmail.com">wemakehustleplay@gmail.com</a>' +
         '<a href="tel:+639669900622">0966-990-0622</a>' +
         '</div>' +
