@@ -727,6 +727,27 @@ main {
   color: var(--cream);
 }
 
+.gcash-box {
+  margin: 24px 0;
+  padding: 20px;
+  background: #f5f0e6;
+  color: #111;
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.gcash-box .muted {
+  color: #5c5c5c;
+}
+
+.gcash-qr {
+  width: min(100%, 280px);
+  height: auto;
+  margin: 12px auto;
+  border-radius: 12px;
+  background: #fff;
+}
+
 .about-prose,
 .contact-block {
   max-width: 40rem;
