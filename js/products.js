@@ -36,6 +36,8 @@
           ink: 'Cream script',
           images: [
             'images/tee-boxy-black.png',
+            'images/tee-black-look.jpg',
+            'images/tee-black-look-2.jpg',
             'images/tees-flatlay.jpg',
           ],
         },
