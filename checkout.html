@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — ClutchPlay</title>
+  <meta name="description" content="Checkout with name, address, mobile number, and email. Cash on Delivery available.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+  <main id="main">
+    <div class="page-hero">
+      <h1>Checkout</h1>
+      <p>We ship nationwide. Metro Manila 2–4 days. Provincial 5–10 days.</p>
+    </div>
+    <div class="checkout-layout">
+      <form id="checkout-form" novalidate>
+        <div class="form-grid">
+          <label for="fullName">Full name
+            <input id="fullName" name="fullName" autocomplete="name" required>
+            <span class="field-error" id="fullName-error"></span>
+          </label>
+          <label for="street">Street address
+            <input id="street" name="street" autocomplete="address-line1" required>
+            <span class="field-error" id="street-error"></span>
+          </label>
+          <label for="city">Barangay / City
+            <input id="city" name="city" autocomplete="address-level2" required>
+            <span class="field-error" id="city-error"></span>
+          </label>
+          <label for="province">Province
+            <input id="province" name="province" autocomplete="address-level1" required>
+            <span class="field-error" id="province-error"></span>
+          </label>
+          <label for="postal">Postal code
+            <input id="postal" name="postal" inputmode="numeric" autocomplete="postal-code" maxlength="4" required>
+            <span class="field-error" id="postal-error"></span>
+          </label>
+          <label for="mobile">Mobile number
+            <input id="mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XXXXXXXXX or +639XXXXXXXXX" required>
+            <span class="field-error" id="mobile-error"></span>
+          </label>
+          <label for="email">Email
+            <input id="email" name="email" type="email" autocomplete="email" required>
+            <span class="field-error" id="email-error"></span>
+          </label>
+        </div>
+
+        <p class="field-label">Payment</p>
+        <div class="pay-card">
+          <label>
+            <input type="radio" name="payment" value="cod" checked>
+            <span><strong>Cash on Delivery</strong><br><span class="muted">Pay when your order arrives.</span></span>
+          </label>
+          <label>
+            <input type="radio" name="payment" value="gcash">
+            <span><strong>GCash / bank transfer</strong><br><span class="muted">Details sent after order.</span></span>
+          </label>
+        </div>
+
+        <p style="margin-top:24px;">
+          <button class="btn btn-primary btn-block" id="place-order" type="submit">Place Order</button>
+        </p>
+      </form>
+
+      <aside>
+        <h2 style="margin-bottom:16px;">Order summary</h2>
+        <div id="order-summary" class="order-summary"></div>
+      </aside>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>
