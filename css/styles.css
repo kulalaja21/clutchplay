@@ -248,11 +248,14 @@ main {
 }
 
 .hero .kicker {
-  font-size: 0.72rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 2.4vw, 1.1rem);
+  font-weight: 600;
   letter-spacing: 0.28em;
+  line-height: 1.35;
   text-transform: uppercase;
   color: var(--grey);
-  margin-bottom: 16px;
+  margin: 0 0 20px;
 }
 
 .hero h1 {
