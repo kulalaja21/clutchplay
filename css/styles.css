@@ -212,6 +212,11 @@ h3 {
   color: var(--cream);
 }
 
+.nav-email {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 body.nav-open {
   overflow: hidden;
 }
