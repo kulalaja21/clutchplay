@@ -247,7 +247,7 @@ main {
   width: min(46vw, 220px);
   height: auto;
   display: block;
-  margin: 0 auto 18px;
+  margin: 0 auto;
   mix-blend-mode: screen;
 }
 
@@ -256,7 +256,6 @@ main {
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin: 0 0 20px;
 }
 
 .hero-logo {
@@ -281,7 +280,7 @@ main {
 }
 
 .hero h1 {
-  margin: 0 0 16px;
+  margin: -2.4em 0 16px;
   text-transform: none;
   letter-spacing: 0;
 }
