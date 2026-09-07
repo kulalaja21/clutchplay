@@ -9,7 +9,7 @@
   --muted-bg: #ece8e1;
   --danger: #9b1c1c;
   --radius: 10px;
-  --header: 64px;
+  --header: 72px;
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-script: "Great Vibes", "Segoe Script", cursive;
@@ -124,16 +124,11 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 52px;
-  width: min(260px, 62vw);
-  overflow: hidden;
-}
-
-.wordmark img {
-  height: 175px;
-  width: auto;
-  max-width: none;
-  object-fit: contain;
+  font-family: var(--font-script);
+  font-size: 2.75rem;
+  line-height: 1;
+  color: var(--white);
+  white-space: nowrap;
 }
 
 .site-nav {
@@ -868,12 +863,7 @@ body.product-cream .sticky-cta {
 
   .wordmark {
     justify-self: start;
-    width: 300px;
-    height: 56px;
-  }
-
-  .wordmark img {
-    height: 200px;
+    font-size: 3.25rem;
   }
 
   .lifestyle-strip {
