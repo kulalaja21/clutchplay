@@ -133,6 +133,7 @@ h3 {
   max-height: 15px;
   display: block;
   object-fit: contain;
+  mix-blend-mode: screen;
 }
 
 .site-nav {
