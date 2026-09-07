@@ -9,7 +9,7 @@
   --muted-bg: #ece8e1;
   --danger: #9b1c1c;
   --radius: 10px;
-  --header: 64px;
+  --header: 76px;
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-script: "Great Vibes", "Segoe Script", cursive;
@@ -123,11 +123,11 @@ h3 {
   justify-self: center;
   display: flex;
   align-items: center;
-  height: 36px;
+  height: 52px;
 }
 
 .wordmark img {
-  height: 28px;
+  height: 48px;
   width: auto;
   object-fit: contain;
 }
@@ -247,7 +247,7 @@ main {
 }
 
 .hero h1.script {
-  font-size: clamp(3.2rem, 16vw, 7.2rem);
+  font-size: clamp(4.4rem, 22vw, 9.5rem);
   text-transform: none;
   letter-spacing: 0;
   font-weight: 400;
@@ -748,7 +748,7 @@ main {
 }
 
 .footer-brand .script {
-  font-size: 2.2rem;
+  font-size: 2.8rem;
   margin: 0 0 8px;
 }
 
@@ -867,7 +867,7 @@ body.product-cream .sticky-cta {
   }
 
   .wordmark img {
-    height: 32px;
+    height: 56px;
   }
 
   .lifestyle-strip {
