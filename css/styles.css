@@ -243,6 +243,14 @@ main {
   width: 100%;
 }
 
+.hero-mark {
+  width: min(46vw, 220px);
+  height: auto;
+  display: block;
+  margin: 0 auto 18px;
+  mix-blend-mode: screen;
+}
+
 .hero-marks {
   display: flex;
   flex-direction: column;
