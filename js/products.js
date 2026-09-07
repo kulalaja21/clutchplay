@@ -6,7 +6,7 @@
 
   window.CLUTCHPLAY.SIZES = ['S', 'M', 'L', 'XL', 'XXL'];
 
-  window.CLUTCHPLAY.ORDER_EMAIL = 'orders@clutchplay.ph';
+  window.CLUTCHPLAY.ORDER_EMAIL = 'wemakehustleplay@gmail.com';
 
   window.CLUTCHPLAY.PRODUCTS = [
     {
