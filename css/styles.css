@@ -762,6 +762,7 @@ main {
   color: #d4d4d4;
 }
 
+.about-prose a,
 .contact-block a {
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -854,6 +855,24 @@ body.product-cream .sticky-cta {
   justify-content: center;
   flex-direction: column;
   align-items: stretch;
+}
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 22px;
+  margin: 18px 0 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.social-row a {
+  color: var(--white);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .split-cta .btn {
