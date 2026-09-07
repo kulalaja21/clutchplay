@@ -73,6 +73,7 @@
         '<a href="about.html">About</a>' +
         '<a href="contact.html">Contact</a>' +
         '<a href="https://www.facebook.com/TheCLutchPlayPh" target="_blank" rel="noopener noreferrer">Follow us on Facebook</a>' +
+        '<a href="tel:+639669900622">0966-990-0622</a>' +
         '</div>' +
         '<p class="fineprint">Nationwide shipping. Metro Manila 2–4 days. Provincial 5–10 days. Cash on Delivery available.</p>' +
         '</div>';
