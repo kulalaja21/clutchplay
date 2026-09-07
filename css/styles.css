@@ -127,13 +127,14 @@ h3 {
 }
 
 .wordmark img {
-  height: 36px;
+  height: 0.95rem;
   width: auto;
   display: block;
 }
 
 .site-nav {
   display: none;
+  align-items: center;
 }
 
 .nav-toggle {
@@ -200,6 +201,7 @@ h3 {
 .site-nav a {
   padding: 12px 4px;
   font-size: 0.95rem;
+  line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -887,10 +889,6 @@ body.product-cream .sticky-cta {
 
   .wordmark {
     justify-self: start;
-  }
-
-  .wordmark img {
-    height: 40px;
   }
 
   .lifestyle-strip {
