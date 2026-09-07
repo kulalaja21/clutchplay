@@ -231,14 +231,17 @@ main {
   place-items: center;
   text-align: center;
   padding: 48px 20px 64px;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.78)),
-    url("../images/tee-cream-wall.jpg") center 28% / cover no-repeat,
-    var(--black);
+  background: var(--black);
 }
 
 .hero-copy {
-  max-width: 36rem;
+  max-width: 40rem;
+}
+
+.hero-logo {
+  width: min(92vw, 720px);
+  height: auto;
+  margin: 0 auto 8px;
 }
 
 .hero .kicker {
@@ -250,15 +253,9 @@ main {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 10vw, 5.5rem);
-  margin-bottom: 16px;
-}
-
-.hero h1.script {
-  font-size: clamp(4.4rem, 22vw, 9.5rem);
+  margin: 0 0 16px;
   text-transform: none;
   letter-spacing: 0;
-  font-weight: 400;
 }
 
 .hero p {
