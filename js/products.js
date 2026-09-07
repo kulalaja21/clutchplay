@@ -11,10 +11,10 @@
   window.CLUTCHPLAY.PRODUCTS = [
     {
       id: 'tee',
-      name: 'Oversized Script Logo Tee',
+      name: 'Boxy Script Tee',
       price: 799,
       tag: 'Drop 01',
-      blurb: 'Heavy cotton. Oversized streetwear fit. Script wordmark across the chest.',
+      blurb: 'Heavy cotton. Boxy streetwear fit. Script wordmark across the chest.',
       details:
         'Boxy crewneck in heavy cotton. Dropped shoulders, relaxed sleeves, and the ClutchPlay script printed large on the chest. Made to look lived-in from day one.',
       colors: [
@@ -24,9 +24,9 @@
           hex: '#F5F0E6',
           ink: 'Burgundy script',
           images: [
+            'images/tee-boxy-cream.png',
             'images/tee-cream-wall.jpg',
             'images/tee-cream-fence.jpg',
-            'images/tees-flatlay.jpg',
           ],
         },
         {
@@ -34,7 +34,10 @@
           name: 'Black',
           hex: '#111111',
           ink: 'Cream script',
-          images: ['images/tees-flatlay.jpg'],
+          images: [
+            'images/tee-boxy-black.png',
+            'images/tees-flatlay.jpg',
+          ],
         },
       ],
     },
