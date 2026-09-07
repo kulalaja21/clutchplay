@@ -3,6 +3,7 @@
 
   var MOBILE_RE = /^(09\d{9}|\+639\d{9}|639\d{9})$/;
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var GCASH_QR_PATH = 'images/gcash-qr.png';
 
   function setError(id, message) {
     var el = document.getElementById(id + '-error');
@@ -18,6 +19,75 @@
   function val(id) {
     var el = document.getElementById(id);
     return el ? el.value.trim() : '';
+  }
+
+  function siteBase() {
+    var path = window.location.pathname.replace(/[^/]+$/, '');
+    return window.location.origin + path;
+  }
+
+  function gcashQrUrl() {
+    return siteBase() + GCASH_QR_PATH;
+  }
+
+  function isGcash(order) {
+    return order.paymentId === 'gcash';
+  }
+
+  function itemLines(order) {
+    return order.items
+      .map(function (item) {
+        return (
+          item.name +
+          ' — ' +
+          item.colorName +
+          ' / ' +
+          item.size +
+          ' × ' +
+          item.quantity +
+          ' (' +
+          window.CLUTCHPLAY.formatPeso(item.lineTotal) +
+          ')'
+        );
+      })
+      .join('\n');
+  }
+
+  function orderBody(order, forBuyer) {
+    var greeting = forBuyer
+      ? 'Salamat for your ClutchPlay order.\n\n'
+      : 'New ClutchPlay order.\n\n';
+    var body =
+      greeting +
+      'Reference: ' +
+      order.id +
+      '\n\n' +
+      order.buyer.fullName +
+      '\n' +
+      order.buyer.street +
+      '\n' +
+      order.buyer.city +
+      ', ' +
+      order.buyer.province +
+      ' ' +
+      order.buyer.postal +
+      '\n' +
+      order.buyer.mobile +
+      '\n' +
+      order.buyer.email +
+      '\n\n' +
+      itemLines(order) +
+      '\n\nSubtotal: ' +
+      window.CLUTCHPLAY.formatPeso(order.subtotal) +
+      '\nPayment: ' +
+      order.payment;
+    if (isGcash(order)) {
+      body +=
+        '\n\nPay via GCash. Scan this QR:\n' +
+        gcashQrUrl() +
+        '\nTransfer fees may apply.\nAccount: AN***O G.\nMobile: 0966 990 ****';
+    }
+    return body;
   }
 
   function renderSummary() {
@@ -46,7 +116,7 @@
         })
         .join('') +
       '<div class="cart-totals"><span>Subtotal</span><strong>' + window.CLUTCHPLAY.formatPeso(window.CLUTCHPLAY.Cart.subtotal()) + '</strong></div>' +
-      '<p class="muted">Shipping computed on dispatch. Cash on Delivery available nationwide.</p>';
+      '<p class="muted">Shipping computed on dispatch. Cash on Delivery or GCash.</p>';
   }
 
   function validate() {
@@ -82,27 +152,58 @@
   }
 
   function buildMailto(order) {
-    var lines = order.items
-      .map(function (item) {
-        return item.name + ' / ' + item.colorName + ' / ' + item.size + ' x' + item.quantity;
-      })
-      .join('\n');
-    var body =
-      'Order ' + order.id + '\n\n' +
-      order.buyer.fullName + '\n' +
-      order.buyer.street + '\n' +
-      order.buyer.city + ', ' + order.buyer.province + ' ' + order.buyer.postal + '\n' +
-      order.buyer.mobile + '\n' +
-      order.buyer.email + '\n\n' +
-      lines + '\n\nSubtotal: ' + window.CLUTCHPLAY.formatPeso(order.subtotal) + '\nPayment: ' + order.payment;
     return (
       'mailto:' +
       encodeURIComponent(window.CLUTCHPLAY.ORDER_EMAIL) +
-      '?subject=' +
+      '?cc=' +
+      encodeURIComponent(order.buyer.email) +
+      '&subject=' +
       encodeURIComponent('ClutchPlay order ' + order.id) +
       '&body=' +
-      encodeURIComponent(body)
+      encodeURIComponent(orderBody(order, false))
     );
+  }
+
+  function sendOrderEmails(order) {
+    var payload = {
+      _subject: 'ClutchPlay order ' + order.id,
+      _template: 'box',
+      _captcha: 'false',
+      _cc: order.buyer.email,
+      _autoresponse: orderBody(order, true),
+      name: order.buyer.fullName,
+      email: order.buyer.email,
+      mobile: order.buyer.mobile,
+      address:
+        order.buyer.street +
+        ', ' +
+        order.buyer.city +
+        ', ' +
+        order.buyer.province +
+        ' ' +
+        order.buyer.postal,
+      payment: order.payment,
+      order_id: order.id,
+      items: itemLines(order),
+      subtotal: window.CLUTCHPLAY.formatPeso(order.subtotal),
+      message: orderBody(order, false),
+    };
+    if (isGcash(order)) {
+      payload.gcash_qr = gcashQrUrl();
+    }
+    return fetch('https://formsubmit.co/ajax/' + encodeURIComponent(window.CLUTCHPLAY.ORDER_EMAIL), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(payload),
+    }).then(function (response) {
+      if (!response.ok) {
+        throw new Error('Email send failed');
+      }
+      return response.json();
+    });
   }
 
   function placeOrder(event) {
@@ -114,11 +215,12 @@
       }
       return;
     }
-    var payment = (document.querySelector('input[name="payment"]:checked') || {}).value || 'cod';
+    var paymentId = (document.querySelector('input[name="payment"]:checked') || {}).value || 'cod';
     var order = {
       id: orderRef(),
       createdAt: new Date().toISOString(),
-      payment: payment === 'gcash' ? 'GCash / bank transfer — details sent after order' : 'Cash on Delivery',
+      paymentId: paymentId,
+      payment: paymentId === 'gcash' ? 'GCash' : 'Cash on Delivery',
       subtotal: window.CLUTCHPLAY.Cart.subtotal(),
       buyer: {
         fullName: val('fullName'),
@@ -131,10 +233,24 @@
       },
       items: window.CLUTCHPLAY.Cart.getLines(),
     };
-    window.CLUTCHPLAY.Cart.saveOrder(order);
-    window.CLUTCHPLAY.Cart.clear();
-    window.sessionStorage.setItem('clutchplay_mailto', buildMailto(order));
-    window.location.href = 'confirmation.html';
+    var btn = document.getElementById('place-order');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'Sending order...';
+    }
+    sendOrderEmails(order)
+      .then(function () {
+        order.emailStatus = 'sent';
+      })
+      .catch(function () {
+        order.emailStatus = 'failed';
+      })
+      .then(function () {
+        window.CLUTCHPLAY.Cart.saveOrder(order);
+        window.CLUTCHPLAY.Cart.clear();
+        window.sessionStorage.setItem('clutchplay_mailto', buildMailto(order));
+        window.location.href = 'confirmation.html';
+      });
   }
 
   function renderConfirmation() {
@@ -153,17 +269,64 @@
         return '<li>' + item.name + ' — ' + item.colorName + ' / ' + item.size + ' × ' + item.quantity + ' (' + window.CLUTCHPLAY.formatPeso(item.lineTotal) + ')</li>';
       })
       .join('');
+    var gcash =
+      isGcash(order)
+        ? '<div class="gcash-box">' +
+          '<p><strong>Pay with GCash</strong></p>' +
+          '<p class="muted">Scan this QR. Transfer fees may apply.</p>' +
+          '<img class="gcash-qr" src="' +
+          GCASH_QR_PATH +
+          '" alt="GCash QR code for ClutchPlay">' +
+          '<p>AN***O G.<br>0966 990 ****</p>' +
+          '</div>'
+        : '';
+    var mailNote =
+      order.emailStatus === 'failed'
+        ? '<p class="muted">The automatic email could not send. Use the button below so the shop and your inbox both get a copy. The first shop order also needs ' +
+          window.CLUTCHPLAY.ORDER_EMAIL +
+          ' to confirm FormSubmit.</p>'
+        : '<p class="muted">A copy was sent to ' +
+          order.buyer.email +
+          ' and ' +
+          window.CLUTCHPLAY.ORDER_EMAIL +
+          '.</p>';
     root.innerHTML =
       '<div class="confirm-card">' +
       '<p class="muted">Order placed</p>' +
-      '<h1>Salamat, ' + order.buyer.fullName.split(' ')[0] + '</h1>' +
-      '<p>Reference <span class="order-ref">' + order.id + '</span></p>' +
-      '<p>' + order.buyer.street + '<br>' + order.buyer.city + ', ' + order.buyer.province + ' ' + order.buyer.postal + '<br>' + order.buyer.mobile + '<br>' + order.buyer.email + '</p>' +
-      '<ul>' + items + '</ul>' +
-      '<p><strong>Subtotal ' + window.CLUTCHPLAY.formatPeso(order.subtotal) + '</strong><br>' + order.payment + '</p>' +
+      '<h1>Salamat, ' +
+      order.buyer.fullName.split(' ')[0] +
+      '</h1>' +
+      '<p>Reference <span class="order-ref">' +
+      order.id +
+      '</span></p>' +
+      mailNote +
+      gcash +
+      '<p>' +
+      order.buyer.street +
+      '<br>' +
+      order.buyer.city +
+      ', ' +
+      order.buyer.province +
+      ' ' +
+      order.buyer.postal +
+      '<br>' +
+      order.buyer.mobile +
+      '<br>' +
+      order.buyer.email +
+      '</p>' +
+      '<ul>' +
+      items +
+      '</ul>' +
+      '<p><strong>Subtotal ' +
+      window.CLUTCHPLAY.formatPeso(order.subtotal) +
+      '</strong><br>' +
+      order.payment +
+      '</p>' +
       '<div class="split-cta">' +
-      '<a class="btn btn-primary" href="' + mailto + '">Email this order</a>' +
-      '<a class="btn btn-ghost" href="shop.html">Continue shopping</a>' +
+      '<a class="btn btn-ghost" href="' +
+      mailto +
+      '">Email this order</a>' +
+      '<a class="btn btn-primary" href="shop.html">Continue shopping</a>' +
       '</div></div>';
   }
 
