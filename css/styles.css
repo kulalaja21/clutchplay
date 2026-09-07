@@ -280,7 +280,7 @@ main {
 }
 
 .hero h1 {
-  margin: -2.4em 0 16px;
+  margin: -1.2em 0 16px;
   text-transform: none;
   letter-spacing: 0;
 }
@@ -341,12 +341,19 @@ main {
 }
 
 .lifestyle-strip {
-  display: grid;
-  grid-template-columns: 1fr;
+  overflow: hidden;
+}
+
+.lifestyle-track {
+  display: flex;
+  width: max-content;
+  animation: lifestyle-ltr 36s linear infinite;
 }
 
 .lifestyle-strip figure {
   margin: 0;
+  flex: 0 0 70vw;
+  max-width: 280px;
   aspect-ratio: 4 / 5;
   overflow: hidden;
   background: var(--grey-2);
@@ -356,6 +363,32 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@keyframes lifestyle-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lifestyle-track {
+    animation: none;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .lifestyle-strip figure {
+    flex: 1 1 50%;
+    max-width: none;
+  }
+
+  .lifestyle-strip figure:nth-child(n + 5) {
+    display: none;
+  }
 }
 
 .marquee {
@@ -939,11 +972,9 @@ body.product-cream .sticky-cta {
     margin-right: 0;
   }
 
-  .lifestyle-strip {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .lifestyle-strip figure {
+    flex-basis: 28vw;
+    max-width: none;
     aspect-ratio: 3 / 4;
   }
 
@@ -983,10 +1014,6 @@ body.product-cream .sticky-cta {
 }
 
 @media (min-width: 1080px) {
-  .lifestyle-strip {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
   .header-inner,
   .section,
   .page-hero,
