@@ -111,30 +111,28 @@ h3 {
 }
 
 .header-inner {
-  display: grid;
-  grid-template-columns: 44px auto 44px;
+  display: flex;
   align-items: center;
-  justify-content: space-between;
   min-height: var(--header);
   padding: 0 16px;
-  gap: 8px;
+  gap: 12px;
 }
 
 .wordmark {
-  justify-self: center;
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   padding: 0;
-  width: auto;
-  max-width: none;
+  margin-right: auto;
 }
 
 .wordmark img {
-  height: 18px !important;
-  width: auto !important;
-  max-width: none !important;
-  max-height: 18px !important;
+  height: 15px;
+  width: auto;
+  max-width: 150px;
+  max-height: 15px;
   display: block;
+  object-fit: contain;
 }
 
 .site-nav {
@@ -164,7 +162,8 @@ h3 {
 }
 
 .cart-link {
-  justify-self: end;
+  flex: 0 0 auto;
+  margin-left: 0;
   position: relative;
   width: 44px;
   height: 44px;
@@ -878,7 +877,6 @@ body.product-cream .sticky-cta {
 
 @media (min-width: 720px) {
   .header-inner {
-    grid-template-columns: auto 1fr auto;
     padding: 0 28px;
   }
 
@@ -890,10 +888,12 @@ body.product-cream .sticky-cta {
   .site-nav {
     display: flex;
     gap: 22px;
+    margin-left: auto;
+    font-size: 0.95rem;
   }
 
   .wordmark {
-    justify-self: start;
+    margin-right: 0;
   }
 
   .lifestyle-strip {
