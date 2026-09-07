@@ -238,13 +238,30 @@ main {
 }
 
 .hero-copy {
-  max-width: 40rem;
+  max-width: 52rem;
+  width: 100%;
+}
+
+.hero-marks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 20px;
 }
 
 .hero-logo {
-  width: min(92vw, 720px);
   height: auto;
-  margin: 0 auto 8px;
+  display: block;
+  mix-blend-mode: screen;
+}
+
+.hero-logo-lockup {
+  width: min(92vw, 680px);
+}
+
+.hero-logo-script {
+  width: min(64vw, 380px);
 }
 
 .hero .kicker {
