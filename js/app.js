@@ -40,9 +40,7 @@
         '<button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">' +
         '<span></span><span></span><span></span>' +
         '</button>' +
-        '<a class="wordmark" href="index.html" aria-label="ClutchPlay home">' +
-        '<img src="images/logo.png" alt="ClutchPlay">' +
-        '</a>' +
+        '<a class="wordmark" href="index.html">ClutchPlay</a>' +
         '<nav id="site-nav" class="site-nav">' +
         navLink('shop.html', 'Shop') +
         navLink('about.html', 'About') +
