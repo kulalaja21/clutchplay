@@ -45,6 +45,7 @@
         navLink('shop.html', 'Shop') +
         navLink('about.html', 'About') +
         navLink('contact.html', 'Contact') +
+        '<a class="nav-email" href="mailto:wemakehustleplay@gmail.com">wemakehustleplay@gmail.com</a>' +
         '</nav>' +
         '<a class="cart-link" href="cart.html" aria-label="Cart">' +
         svgBag() +
@@ -55,6 +56,7 @@
         navLink('shop.html', 'Shop') +
         navLink('about.html', 'About') +
         navLink('contact.html', 'Contact') +
+        '<a class="nav-email" href="mailto:wemakehustleplay@gmail.com">wemakehustleplay@gmail.com</a>' +
         '<a href="https://www.facebook.com/TheCLutchPlayPh" target="_blank" rel="noopener noreferrer">Follow us on Facebook</a>' +
         '</div>';
     }
