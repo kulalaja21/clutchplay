@@ -9,7 +9,7 @@
   --muted-bg: #ece8e1;
   --danger: #9b1c1c;
   --radius: 10px;
-  --header: 96px;
+  --header: 64px;
   --font-body: "DM Sans", system-ui, sans-serif;
   --font-display: "Oswald", "Arial Narrow", sans-serif;
   --font-script: "Great Vibes", "Segoe Script", cursive;
@@ -124,12 +124,15 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-script);
-  font-size: clamp(3.8rem, 11vw, 5.6rem);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   line-height: 1;
   color: var(--white);
   white-space: nowrap;
-  padding: 4px 8px;
+  padding: 12px 4px;
 }
 
 .site-nav {
@@ -864,7 +867,6 @@ body.product-cream .sticky-cta {
 
   .wordmark {
     justify-self: start;
-    font-size: 5.6rem;
   }
 
   .lifestyle-strip {
