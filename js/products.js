@@ -41,6 +41,20 @@
             'images/tees-flatlay.jpg',
           ],
         },
+        {
+          id: 'mocha',
+          name: 'Mocha',
+          hex: '#C4A574',
+          ink: 'Black script',
+          images: ['images/tee-boxy-mocha.png'],
+        },
+        {
+          id: 'choco',
+          name: 'Choco Brown',
+          hex: '#3D2A22',
+          ink: 'Mocha script',
+          images: ['images/tee-boxy-choco.png'],
+        },
       ],
     },
     {
