@@ -26,7 +26,7 @@
     var cards = [];
     window.CLUTCHPLAY.PRODUCTS.forEach(function (product) {
       product.colors.forEach(function (color) {
-        if (product.id === 'hoodie' || color.id === 'cream' || color.id === 'black') {
+        if (product.id === 'hoodie' || product.id === 'tee') {
           cards.push(productCard(product, color));
         }
       });
