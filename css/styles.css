@@ -386,7 +386,7 @@ main {
     max-width: none;
   }
 
-  .lifestyle-strip figure:nth-child(n + 5) {
+  .lifestyle-strip figure:nth-child(n + 7) {
     display: none;
   }
 }
